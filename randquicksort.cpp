@@ -1,24 +1,30 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
-
-void swap(int *a, int *b)
-{
-    int temp;
-    temp=*a;
-    *a=*b;
-    *b=temp;
-}
 
 void display(int arr[],int n)
 {
     int i;
     for(i=0;i<n;i++)
     {
-        cout<<arr[i]<<" ";
+        cout <<arr[i] << " ";
     }
 }
 
-int partition(int arr[],int l ,int h)
+void swap(int *x, int *y)
+{
+    int temp=*x;
+    *x=*y;
+    *y=temp;
+}
+
+void randomisation(int arr[],int l,int h)
+{
+    int n=h-l+1;
+    int temp=rand()%n;
+    swap(&arr[temp+l],&arr[h]);
+}
+
+int partition(int arr[],int l,int h)
 {
     int pivot=arr[h],i=l-1,j;
     for(j=l;j<h;j++)
@@ -37,6 +43,7 @@ void quicksort(int arr[],int l,int h)
 {
     if(l<h)
     {
+        randomisation(arr,l,h);
         int pivot=partition(arr,l,h);
         quicksort(arr,l,pivot-1);
         quicksort(arr,pivot+1,h);
@@ -45,15 +52,15 @@ void quicksort(int arr[],int l,int h)
 
 int main()
 {
-    int i,j,n;
-    cout <<"Enter the no. of elements=";
+    int i,n;
+    cout << "Enter the no. of elements=";
     cin >> n;
-    int arr[n];
+    int a[n];
     for(i=0;i<n;i++)
     {
-        cin >> arr[i];
+        cin >> a[i];
     }
-    quicksort(arr,0,n-1);
-    display(arr,n);
+    quicksort(a,0,n-1);
+    display(a,n);
     return 0;
 }
